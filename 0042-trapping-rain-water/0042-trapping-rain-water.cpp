@@ -1,7 +1,7 @@
 class Solution {
 public:
     int trap(vector<int>& height) 
-    {
+    {/*
         // TC = O(N)   SC = O(N)
         int n = height.size();
         vector<int> leftmax(n), rightmax(n);
@@ -39,6 +39,33 @@ public:
             total += min(leftmax[i], rightmax[i]) - height[i];
         }
         return total;
-        
+        */
+
+        // TC = O(N)   SC = O(1)
+
+        int n = height.size();
+        int leftmax = 0, rightmax = 0;
+        int left = 0, right = n - 1;
+        int total = 0;
+        while(left < right)
+        {
+            if(height[left] <= height[right])
+            {
+                if(leftmax > height[left]) // If water can be stored
+                    total += leftmax - height[left];
+                else
+                    leftmax = height[left];
+                left++;
+            }
+            else
+            {
+                if(rightmax > height[right]) // If water can be stored
+                    total += rightmax - height[right];
+                else
+                    rightmax = height[right];
+                right--;
+            }
+        }
+        return total;
     }
 };
