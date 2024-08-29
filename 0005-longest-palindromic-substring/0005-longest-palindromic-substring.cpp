@@ -1,7 +1,7 @@
 class Solution {
 public:
     //RECURSION + MEMOIZATION
-    
+    /*
     int t[1001][1001];
 
     bool checkPalin(string &s, int i, int j)
@@ -38,6 +38,41 @@ public:
             }
         }
         return maxlen;
-        
+        */
+
+        //expanding from mid 
+
+    string checkPalin(string &s, int left, int right)
+    {
+        string maxlen = "";
+        while(left >=0 && right < s.size() && s[left] == s[right])
+        {
+            string ans = s.substr(left, right - left + 1);
+            if(ans.size() > maxlen.size())
+                maxlen = ans; 
+            left--;
+            right++;   
+        }
+        return maxlen;
+    }
+    
+    string longestPalindrome(string s) 
+    {
+        int n = s.size();
+        string maxlen = "";
+
+        for(int i = 0; i < n ; i++)
+        {
+            string ans1 = checkPalin(s, i, i);
+            if(ans1.size() > maxlen.size())
+                maxlen = ans1;
+
+            string ans2 = checkPalin(s, i, i+1);
+            if(ans2.size() > maxlen.size())
+                maxlen = ans2; 
+        }
+
+        return maxlen;
+
     }
 };
