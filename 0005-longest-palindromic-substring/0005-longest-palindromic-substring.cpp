@@ -40,20 +40,19 @@ public:
         return maxlen;
         */
 
-        //expanding from mid 
-
-    string checkPalin(string &s, int left, int right)
+  
+    // Expanding from mid to find palindromes
+    string checkPalin(string &s, int left, int right) 
     {
         string maxlen = "";
-        while(left >=0 && right < s.size() && s[left] == s[right])
+        while (left >= 0 && right < s.size() && s[left] == s[right]) 
         {
-            string ans = s.substr(left, right - left + 1);
-            if(ans.size() > maxlen.size())
-                maxlen = ans; 
+            // Expand outwards
             left--;
-            right++;   
+            right++;
         }
-        return maxlen;
+        // After the loop, left and right will be one step beyond the actual palindrome
+        return s.substr(left + 1, right - left - 1);
     }
     
     string longestPalindrome(string s) 
@@ -61,18 +60,25 @@ public:
         int n = s.size();
         string maxlen = "";
 
-        for(int i = 0; i < n ; i++)
+        for (int i = 0; i < n; i++) 
         {
+            // Check for odd length palindromes (single character center)
             string ans1 = checkPalin(s, i, i);
-            if(ans1.size() > maxlen.size())
+            if (ans1.size() > maxlen.size()) 
+            {
                 maxlen = ans1;
+            }
 
-            string ans2 = checkPalin(s, i, i+1);
-            if(ans2.size() > maxlen.size())
-                maxlen = ans2; 
+            // Check for even length palindromes (two character center)
+            string ans2 = checkPalin(s, i, i + 1);
+            if (ans2.size() > maxlen.size()) 
+            {
+                maxlen = ans2;
+            }
         }
 
         return maxlen;
-
     }
 };
+
+   
