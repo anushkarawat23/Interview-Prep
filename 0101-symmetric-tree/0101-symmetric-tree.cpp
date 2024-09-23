@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-
+/*
     bool palindrome(vector<int> arr)
     {
         int i = 0, j = arr.size()-1;
@@ -77,10 +77,29 @@ public:
                 return false;
 
         }
-        return true;
+        return true;   
+    }
+    */
 
+    //USING RECURSION
+    bool isSymmetric(TreeNode* root) 
+    {
+        if(!root)
+            return true;
         
+        return symmetry(root -> left, root -> right);
+    }
 
+    bool symmetry(TreeNode* root1, TreeNode* root2)
+    {
+        if(!root1 && !root2)    //means root does not have left and right children
+            return true;
+        if(!root1 || !root2)   //means root has 1 child (left or right)
+            return false;
         
+        if(root1 -> val != root2 -> val)
+            return false;
+        
+        return symmetry(root1->left, root2->right) && symmetry(root1->right, root2->left);
     }
 };
