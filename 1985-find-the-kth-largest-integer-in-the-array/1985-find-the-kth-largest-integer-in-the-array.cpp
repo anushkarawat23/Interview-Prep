@@ -23,10 +23,18 @@ public:
 
         for(int i = k; i < nums.size() ; i++)
         {
-            if(nums[i] > minheap.top())
+            if(nums[i].length() > minheap.top().length() )
             {
                 minheap.pop();
                 minheap.push(nums[i]);
+            }
+            else if(nums[i].length() == minheap.top().length())
+            {
+                if(nums[i] > minheap.top())
+                {
+                    minheap.pop();
+                    minheap.push(nums[i]);
+                }
             }
         }
 
